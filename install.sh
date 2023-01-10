@@ -19,14 +19,6 @@ get_os() {
     echo "${machine}"
 }
 
-# Function to install aws ssm plugin
-function install_plugin() {
-    echo -e "${green}Installing AWS SSM Plugin${NC}"
-    sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-    sudo systemctl enable amazon-ssm-agent
-    sudo systemctl start amazon-ssm-agent
-}
-
 # Function to install brew package
 function install_brew_package() {
     echo -ne "${green}- Installing $1... ${NC}"
@@ -96,6 +88,26 @@ then
 else
     echo -e "${green}✅ Version ${BASH_VERSION}${NC}"
 fi
+
+# Confirm if user wants to continue
+echo 
+echo -e "${red}This script will install the following packages:${NC}"
+echo -e "${green}- Brew${NC}"
+echo -e "${green}- Python 3${NC}"
+echo -e "${green}- Pipx${NC}"
+echo -e "${green}- AWS CLI${NC}"
+echo -e "${green}- AWS SSM Session Manager Plugin${NC}"
+echo -e "${green}- AWS SSM Tools${NC}"
+echo
+read -p "Do you want to continue? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "${green}OK! Let's do this!${NC}"
+else
+    echo -e "${red}OK! As you wish...${NC}"
+    exit 1
+fi
+echo
 
 # Check if brew is installed
 echo -ne "${NC}- Searching for brew: ${NC}"
