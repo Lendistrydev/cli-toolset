@@ -7,9 +7,6 @@ This script installs the following packages:
 - AWS CLI
 - AWS SSM Session Manager Plugin
 - AWS SSM Tools (https://github.com/mludvig/aws-ssm-tools)
-- AWS VPN Client
-- Leapp (https://leapp.cloud/9
-
 
 ## Invoking the script
 
